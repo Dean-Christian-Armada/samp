@@ -40,6 +40,8 @@ INSTALLED_APPS = (
     'snippets',
     'webcam',
     'django_webcam',
+    'pdf_report',
+    'easy_pdf',
 )
 
 MIDDLEWARE_CLASSES = (

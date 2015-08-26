@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^webcam/', 'django_webcam.views.index'),
     url(r'^save-image/', 'django_webcam.views.save_image'),
     url(r'^update-image/', 'django_webcam.views.update_image'),
+    url(r'^pdf-report/', 'pdf_report.views.index'),
 ]
 
 # Enables Media

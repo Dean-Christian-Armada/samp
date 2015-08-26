@@ -20,13 +20,14 @@ def index(request):
 def save_image(request):
 	if request.method == 'POST':
 		print "dean"
-		x = 'media/tmp/someimage.jpg'
+		# does not work with starting slash
+		x = 'media/pictures/tmp/someimage.jpg'
 		# y = 'media/pictures/someimage.jpg'
 		f = open(x, 'wb')
 		f.write(request.body)
 		f.close()
 		# os.rename(x, y)
-		return HttpResponse("http://127.0.0.1:8001/media/tmp/someimage.jpg")
+		return HttpResponse(request.scheme+"://"+request.META['HTTP_HOST']+"/"+x)
 	else:
 		return HttpResponse("No data")
 

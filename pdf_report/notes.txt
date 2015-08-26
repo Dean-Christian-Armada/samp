@@ -1,0 +1,7 @@
+Used templatetags with arguments
+Used easy_pdf package
+
+Reference: https://github.com/nigma/django-easy-pdf/issues/16
+
+Converted "http source encode" to "image base 64 encode"
+	- take a look at templatetags/pdf_filter.py for conversion code
