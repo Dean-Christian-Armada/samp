@@ -6,7 +6,7 @@ register = template.Library()
 @register.filter
 def get64(value, url):
     """
-    Method returning base64 image data instead of URL
+    Method returning base64 image data instead of URL for PDF output
     """
     if url.startswith("http"):
         image = cStringIO.StringIO(urllib.urlopen(url).read())

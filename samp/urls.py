@@ -23,11 +23,12 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'samp.views.home'),
-    url(r'^snippets/', include('snippets.urls')),
-    url(r'^webcam/', 'django_webcam.views.index'),
-    url(r'^save-image/', 'django_webcam.views.save_image'),
-    url(r'^update-image/', 'django_webcam.views.update_image'),
-    url(r'^pdf-report/', 'pdf_report.views.index'),
+    url(r'^snippets/$', include('snippets.urls')),
+    url(r'^webcam/$', 'django_webcam.views.index'),
+    url(r'^save-image/$', 'django_webcam.views.save_image'),
+    url(r'^update-image/$', 'django_webcam.views.update_image'),
+    url(r'^pdf-report/$', 'pdf_report.views.index'),
+    url(r'^pdf-report/landscape/$', 'pdf_report.views.landscape'),
 ]
 
 # Enables Media

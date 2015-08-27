@@ -3,5 +3,10 @@ Used easy_pdf package
 
 Reference: https://github.com/nigma/django-easy-pdf/issues/16
 
+
+Notes:
 Converted "http source encode" to "image base 64 encode"
 	- take a look at templatetags/pdf_filter.py for conversion code
+Can be changed from portrait to landscape
+	- http://stackoverflow.com/questions/7485702/django-pdf-page-layout-with-long-texts-using-pisa
+Dependent on PISA

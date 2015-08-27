@@ -9,7 +9,29 @@ from easy_pdf.rendering import render_to_pdf_response
 # Create your views here.
 def index(request):
 	# return render(request, 'pdf.html', {})
-	return render_to_pdf_response(request, 'pdf.html', {})
+	template = "pdf.html"
+	# returns hypertext protocol: http or https
+	domain = request.scheme
+	domain += "://"
+	# returns domain name
+	domain += request.META["HTTP_HOST"]
+	context_dict = {"domain":domain}
+	return render_to_pdf_response(request, template, context_dict)
+	# template_name = "hello.html"
+	# resp = HttpResponse(content_type='application/pdf')
+	# result = generate_pdf('pdf.html', file_object=resp)
+	# return result
+
+def landscape(request):
+	# return render(request, 'pdf.html', {})
+	template = "pdf-landscape.html"
+	# returns hypertext protocol: http or https
+	domain = request.scheme
+	domain += "://"
+	# returns domain name
+	domain += request.META["HTTP_HOST"]
+	context_dict = {"domain":domain}
+	return render_to_pdf_response(request, template, context_dict)
 	# template_name = "hello.html"
 	# resp = HttpResponse(content_type='application/pdf')
 	# result = generate_pdf('pdf.html', file_object=resp)
