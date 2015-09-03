@@ -1,7 +1,9 @@
 <!-- formsets -->
 <form method="POST">
 	{% csrf_token %}
-	{{ section_form }}
+	<p>{{ section_form }}</p>
+	<p>{{ favorite_subject_form }}</p>
+	
 	{{ student_form }}
 	<input type="submit" name="submit" value="submit">
 </form>

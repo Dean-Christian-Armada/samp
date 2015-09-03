@@ -4,5 +4,6 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'^forms/$', views.forms, name='forms'),
+    url(r'^forms/', views.forms, name='forms'),
+    url(r'^viewing-data/', views.viewing_data, name='viewing_data'),
 ]

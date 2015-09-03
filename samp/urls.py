@@ -22,8 +22,10 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^$', 'samp.views.home'),
-    url(r'^snippets/$', include('snippets.urls')),
+    url(r'^snippets/', include('snippets.urls')),
+    url(r'^autocomplete-light/', include('auto_complete_light.urls')),
     url(r'^webcam/$', 'django_webcam.views.index'),
     url(r'^save-image/$', 'django_webcam.views.save_image'),
     url(r'^update-image/$', 'django_webcam.views.update_image'),

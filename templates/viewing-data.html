@@ -1,0 +1,106 @@
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<form method="POST" id="myform" action="{% url 'viewing_data' %}">
+	{% csrf_token %}
+	<p>
+		Section: <select name="section">
+			<option>{% if request.GET.section %}{{ request.GET.section }}{% endif %}</option>
+			{% if not request.GET.section %}
+				{% for sections in section %}
+					<option>
+						{{ sections }}
+					</option>
+				{% endfor %}
+			{% endif %}
+		</select>
+	</p>
+	<p>
+		Subject: <select name="favorite_subject">
+			<option>{% if request.GET.favorite_subject %}{{ request.GET.favorite_subject }}{% endif %}</option>
+			{% if not request.GET.favorite_subject %}
+				{% for favorite_subjects in favorite_subject %}
+					<option>{{ favorite_subjects }}</option>
+				{% endfor %}
+			{% endif %}
+		</select>
+	</p>
+	<p>
+		Number: <select name="favorite_number">
+			<option>{% if request.GET.favorite_number %}{{ request.GET.favorite_number }}{% endif %}</option>
+			{% if not request.GET.favorite_number %}
+				{% for favorite_numbers in favorite_number %}
+					<option>{{ favorite_numbers }}</option>
+				{% endfor %}
+			{% endif %}
+		</select>
+	</p>
+
+	<p>
+		Number of entries per page: <select name="students_on_table">
+			<option>{% if request.GET.students_on_table %}{{ request.GET.students_on_table }}{% endif %}</option>
+			{% for x in students_on_table %}
+				{% if forloop.counter != x %}
+					<option>{{forloop.counter}}</option>
+				{% endif %}
+			{% endfor %}
+<!-- 			<option>15</option>
+			<option>30</option>
+			<option>60</option> -->
+		</select>
+	</p>
+	
+	
+	<!-- <p><input type="submit" name="submit"></p> -->
+	<p><a href="{% url 'viewing_data' %}">Reset</a></p>
+</form>
+
+
+
+<table border="1px">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Section</th>
+			<th>Favorite Subjects</th>
+			<th>Favorite Number</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for students in student %}
+			<tr>
+				<td>{{ students }}</td>
+				<td>{{ students.section }}</td>
+				<td>{{ students.favorite_subject }}</td>
+				<td>{{ students.favorite_number }}</td>
+			</tr>
+		{% endfor %}
+		
+	</tbody>
+</table>
+
+<p>
+	<div class="pagination">
+	    <span class="step-links">
+	        {% if student.has_previous %}
+	            <a href="{{ params }}&page={{ student.previous_page_number }}">previous</a>
+	        {% endif %}
+
+	        <span class="current">
+	            Page {{ student.number }} of {{ student.paginator.num_pages }}
+	        </span>
+
+	        {% if student.has_next %}
+	            <a href="{{ params }}&page={{ student.next_page_number }}">next</a>
+	        {% endif %}
+	    </span>
+	</div>	
+</p>
+
+
+
+<script type="text/javascript">
+	$("select").change(function(){
+		$("#myform").submit();
+	});
+</script>
+

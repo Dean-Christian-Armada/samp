@@ -1,6 +1,7 @@
 Used templatetags with arguments
 Used easy_pdf package
-
+	- pip install django-easy-pdf
+	
 Reference: https://github.com/nigma/django-easy-pdf/issues/16
 
 

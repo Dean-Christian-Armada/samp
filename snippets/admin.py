@@ -5,3 +5,5 @@ from . models import *
 
 admin.site.register(Students)
 admin.site.register(Section)
+admin.site.register(FavoriteNumber)
+admin.site.register(FavoriteSubject)

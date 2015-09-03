@@ -42,6 +42,9 @@ INSTALLED_APPS = (
     'django_webcam',
     'pdf_report',
     'easy_pdf',
+    'autocomplete_light',
+    'auto_complete_light',
+    'approximate_dates',
 )
 
 MIDDLEWARE_CLASSES = (

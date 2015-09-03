@@ -11,3 +11,8 @@ class SectionForm(forms.ModelForm):
 	class Meta:
 		model = Section
 		fields = ('section', )
+
+class FavoriteSubjectForm(forms.ModelForm):
+	class Meta:
+		model = FavoriteSubject
+		fields = ('favorite_subject', )
