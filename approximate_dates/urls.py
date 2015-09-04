@@ -5,5 +5,5 @@ from . import views
 
 
 urlpatterns = [
-    # url(r'^month-year/', views.month_year, name='month-year'),
+    url(r'^month-year/', views.month_year, name='month-year'),
 ]

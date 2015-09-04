@@ -1,0 +1,91 @@
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<h1>WITH "OR" and "AND" DYNAMIC FILTERING</h1>
+
+<form>
+	<div>
+		<select class="dynamic" name="field">
+			<option></option>
+			<option>Subject</option>
+			<option>FavoriteSection</option>
+			<option>FavoriteNumber</option>
+		</select>
+
+		<button type="button" class="dean">DEAN</button>
+	</div>
+	
+	
+	
+	<!-- <p><button type="button" class="or-button">OR</button></p> -->
+	
+	<p><input type="submit"></p>
+</form>
+
+<script type="text/javascript">
+	// $("body").on("click", ".dean", function(){
+	// 	$(this).parent().children(".dynamic:not(:last)").each(function(){
+	// 		alert($(this).val());
+	// 	})
+	// });
+	$("body").on("change", ".dynamic", function(){
+		$(this).attr("disabled", true);
+		$(this).before("<button type='button' class='clear'>CLEAR</button>");
+		if( $(this).val() == "Subject" ){
+			$(this).after("<select name='favorite_subject'>{% for subjects in favorite_subject %}<option>{{ subjects }}</option>{% endfor %}</select>");
+		}
+		else if( $(this).val() == "FavoriteSection" ){
+			$(this).after("<select name='section'>{% for sections in section %}<option>{{ sections }}</option>{% endfor %}</select>");
+		}else if( $(this).val() == "FavoriteNumber" ){
+			$(this).after("<select name='favorite_number'>{% for numbers in favorite_number %}<option>{{ numbers }}</option>{% endfor %}</select>");
+		}
+		$(this).next().after("<button type='button' class='add-and-field'>AND</button>")
+	});
+	$("body").on("click", ".clear", function(){
+		$(this).next().attr("disabled", false);
+		$(this).next().next().remove();
+		$(this).remove();
+	});
+	$("body").on("click", ".add-and-field", function(){
+		html = $(".dynamic").html();
+		// $(this).parent().children(".dynamic").each(function(){
+		// 	alert($(this).val());
+		// });
+		$(this).after('<select class="dynamic" name="field">'+html+'</select>');
+		// $(this).parent().children(".dynamic:not(:last)").each(function(){
+			// alert($(this).val());
+			$(this).parent().children(".dynamic option:nth-child(2)").remove();
+			// alert('dean');
+			// $(this).parent().children(".dynamic:last").val("Subject");
+			// alert(x);
+		// });
+	});
+	$("body").on("click", ".or-button", function(){
+		html = $(".dynamic").html();
+		// $(this).after('<select class="dynamic" name="field">'+html+'</select>');
+		$(this).parent().after('<select class="dynamic" name="field">'+html+'</select>');
+		$(this).parent().next().after('<p><button type="button" class="or-button">OR</button></p>');
+		$(this).remove();
+	});
+</script>
+
+
+<!-- 	<select id="subject" name="subject">
+		{% for favorite_subjects in favorite_subject %}
+			<option>{{ favorite_subjects }}</option>
+		{% endfor %}
+	</select> -->
+<!-- 	<select id="section" name="section">
+		{% for sections in section %}
+			<option>
+				{{ sections }}
+			</option>
+		{% endfor %}
+	</select> -->
+
+
+<!-- <select name="favorite_number">
+	{% for favorite_numbers in favorite_number %}
+		<option>{{ favorite_numbers }}</option>
+	{% endfor %}
+</select>
+ -->

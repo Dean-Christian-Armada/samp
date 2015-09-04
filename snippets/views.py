@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.forms.formsets import formset_factory
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse, HttpResponseNotFound
 
 from . forms import *
 from . models import *
@@ -101,6 +101,7 @@ def abc(request, getparam, model, student):
 		return param
 
 
+# WITH "AND" FILTERING
 def viewing_data(request):
 
 	template = 'viewing-data.html'
@@ -163,9 +164,39 @@ def viewing_data(request):
 
 	return render(request, template, context_dict)
 
+def viewing_data_2(request):
+
+
+	# Example USED for AND OR filtering
+	# first_set = set()
+	# student = Students.objects.filter(section=banana).filter(favorite_subject=math)
+	# for x in student:
+	# 	first_set.add(x.name)
+	# student = Students.objects.filter(section=atis).filter()
+	# queryset = Students.objects.filter(reduce(lambda x, y: x | y, [Q(name=item) for item in first_set]))
+	# print queryset
+
+	student = Students.objects.all()
+	section = Section.objects.all()
+	favorite_subject = FavoriteSubject.objects.all()
+	favorite_number = FavoriteNumber.objects.all()
+
+
+	template = 'viewing-data-2.html'
+	context_dict = {}
+	context_dict['student'] = student
+	context_dict['section'] = section
+	context_dict['favorite_subject'] = favorite_subject
+	context_dict['favorite_number'] = favorite_number
+	# context_dict["sample"] = "dean"
+
+	return render(request, template, context_dict)
+
+
 
 
 # Special Codes:
+# viewing_data
 
 # Int loopin inside a template
 # 	- pass a range() from views.py

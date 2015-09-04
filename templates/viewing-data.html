@@ -1,5 +1,7 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
+<h1>WITH "AND" FILTERING</h1>
+
 <form method="POST" id="myform" action="{% url 'viewing_data' %}">
 	{% csrf_token %}
 	<p>
@@ -24,6 +26,7 @@
 			{% endif %}
 		</select>
 	</p>
+
 	<p>
 		Number: <select name="favorite_number">
 			<option>{% if request.GET.favorite_number %}{{ request.GET.favorite_number }}{% endif %}</option>
