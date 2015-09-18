@@ -34,6 +34,9 @@ class Students(models.Model):
 	def __str__(self):
 		return self.name
 
+	def x(self):
+		return self.name+"dean"
+
 # class CommonInfo(models.Model):
 #     name = models.CharField(max_length=100)
 #     age = models.PositiveIntegerField()

@@ -18,6 +18,7 @@ def forms(request):
 	section_form = SectionForm()
 	favorite_subject_form = FavoriteSubjectForm()
 	student_form = formset_factory(StudentForm, extra=3)
+	multiple_form = MultipleForm(5, "DEAN ARMADA")
 
 	if request.method == 'POST':
 		print request.POST
@@ -53,6 +54,7 @@ def forms(request):
 	context_dict = {}
 	context_dict['section_form'] = section_form
 	context_dict['student_form'] = student_form
+	context_dict['multiple_form'] = multiple_form
 	context_dict['favorite_subject_form'] = favorite_subject_form
 	return render(request, template, context_dict)
 

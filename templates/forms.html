@@ -5,5 +5,10 @@
 	<p>{{ favorite_subject_form }}</p>
 	
 	{{ student_form }}
+
+	{% for form in multiple_form %}
+		{{ form }}
+	{% endfor %}
 	<input type="submit" name="submit" value="submit">
+	}
 </form>
