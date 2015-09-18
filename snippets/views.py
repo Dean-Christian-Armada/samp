@@ -25,6 +25,7 @@ def forms(request):
 		section_form = SectionForm(request.POST)
 		student_form = student_form(request.POST)
 		favorite_subject_form = FavoriteSubjectForm(request.POST)
+		multiple_form = MultipleForm(5, "DEAN AADA", request.POST)
 		if section_form.is_valid() and student_form.is_valid():
 			section = section_form.save()
 			favorite_subject = favorite_subject_form.save()
