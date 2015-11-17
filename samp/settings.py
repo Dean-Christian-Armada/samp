@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
     'snippets',
     'webcam',
     'django_webcam',
@@ -45,6 +46,9 @@ INSTALLED_APPS = (
     'autocomplete_light',
     'auto_complete_light',
     'approximate_dates',
+    'swampdragon',
+    'real_time_notifications',
+    'variables_inside_model_text_field',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -103,14 +107,35 @@ USE_L10N = True
 
 USE_TZ = True
 
+# SwampDragon settings
+SWAMP_DRAGON_CONNECTION = ('swampdragon.connections.sockjs_connection.DjangoSubscriberConnection', '/data')
+DRAGON_URL = 'http://localhost:9999/'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_PATH = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+# Additional locations of static files
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+# STATIC_PATH = os.path.join(BASE_DIR, 'static')
+
+# STATICFILES_DIRS = (STATIC_PATH, )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-STATICFILES_DIRS = (STATIC_PATH, )
+# DEFAULT EMAILS
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'deanarmada@gmail.com'
+EMAIL_HOST_PASSWORD = 'd3@narmada13'
+DEFAULT_FROM_EMAIL = 'PEOPLE'
+DEFAULT_TO_EMAIL = 'deanarmada@gmail.com'
+
+LOGIN_URL = '/?error=Please login First'

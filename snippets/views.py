@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.forms.formsets import formset_factory
+from django.utils.functional import curry    
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse, HttpResponseNotFound
 
@@ -7,6 +8,8 @@ from . forms import *
 from . models import *
 
 from urlobject import URLObject
+
+from functools import partial, wraps
 
 import os
 
@@ -195,8 +198,59 @@ def viewing_data_2(request):
 
 	return render(request, template, context_dict)
 
+def update_data(request):
+	# return HttpResponse("dasdasfcvz")
+	x = Section.objects.get(section='dean')
+	section_form = SectionForm(instance=x)
+	
+	if request.method == 'POST':
+		section_form = SectionForm(request.POST, instance=x)
+		section_form.save()
 
+	template = 'update-data.html'
+	context_dict = {}
+	context_dict['section_form'] = section_form
+	return render(request, template, context_dict)
 
+def dynamic_folder(request):
+	# return HttpResponse('dean')
+
+	license_folder = PictureFolders.objects.get(name='Licenses')
+	national_certificates_folder = PictureFolders.objects.get(name='National Certificates')
+	travel_documents_folder = PictureFolders.objects.get(name='Travel-Documents')
+	license_folder_form = DynamicFolderPicture(request.POST or None, request.FILES or None, initial={'folder_path': license_folder})
+	national_certificates_folder_form = DynamicFolderPicture(request.POST or None, request.FILES or None, initial={'folder_path': national_certificates_folder})
+	travel_documents_folder_form = DynamicFolderPicture(request.POST or None, request.FILES or None, initial={'folder_path': travel_documents_folder})
+
+	if license_folder_form.is_valid():
+		license_folder_form.save()
+	else:
+		print license_folder_form.errors
+
+	if national_certificates_folder_form.is_valid():
+		national_certificates_folder_form.save()
+	else:
+		print national_certificates_folder_form.errors
+
+	if travel_documents_folder_form.is_valid():
+		travel_documents_folder_form.save()
+	else:
+		print travel_documents_folder_form.errors
+
+	template = 'dynamic-folder.html'
+	context_dict = {}
+	context_dict['license_folder_form'] = license_folder_form
+	context_dict['national_certificates_folder_form'] = national_certificates_folder_form
+	context_dict['travel_documents_folder_form'] = travel_documents_folder_form
+	return render(request, template, context_dict)
+
+def dynamic_formset(request):
+	foo_formset = formset_factory(wraps(FooForm)(partial(FooForm, 0, 0)), extra=3, formset=FirstRequiredFormSet)
+
+	template = 'dynamic-formset.html'
+	context_dict = {}
+	context_dict['foo_formset'] = foo_formset
+	return render(request, template, context_dict)
 
 # Special Codes:
 # viewing_data

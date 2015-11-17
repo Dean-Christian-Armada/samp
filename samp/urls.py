@@ -18,7 +18,8 @@ from django.conf.urls.static import static
 from django.conf.urls import include, url
 from django.conf import settings
 from django.contrib import admin
-
+# from real_time_notifications.views import Notifications
+# from variables_inside_model_text_field import email_check
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -31,6 +32,9 @@ urlpatterns = [
     url(r'^update-image/$', 'django_webcam.views.update_image'),
     url(r'^pdf-report/$', 'pdf_report.views.index'),
     url(r'^pdf-report/landscape/$', 'pdf_report.views.landscape'),
+    # url(r'^real-time-notification/$', Notifications.as_view(), name='real-time-notification'),
+    url(r'^real-time-notification/$', 'real_time_notifications.views.Notifications', name='real-time-notification'),
+    url(r'^variables-inside-model-text-field/$', 'variables_inside_model_text_field.views.email_check', name='variables-inside-model-text-field'),
 ]
 
 # Enables Media

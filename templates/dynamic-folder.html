@@ -1,0 +1,16 @@
+<form method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	<h1>Licenses</h1>
+	{{license_folder_form}}
+	<input type="submit">
+</form>
+<form method="POST" enctype="multipart/form-data">
+	<h1>Travel Documents</h1>
+	{{national_certificates_folder_form}}
+	<input type="submit">
+</form>
+<form method="POST" enctype="multipart/form-data">
+	<h1>National Certificates</h1>
+	{{travel_documents_folder_form}}
+	<input type="submit">
+</form>

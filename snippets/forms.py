@@ -1,3 +1,4 @@
+from django.forms.formsets import BaseFormSet
 from django import forms
 
 from . models import *
@@ -26,3 +27,25 @@ class MultipleForm(forms.Form):
 		print name
 
 		super(MultipleForm, self).__init__(*args, **kwargs)
+
+class UpdateForm(forms.ModelForm):
+	class Meta:
+		model = Section
+		fields = ('section', )
+
+class DynamicFolderPicture(forms.ModelForm):
+	class Meta:
+		model = NamePicture
+		fields = ('name', 'folder_path', 'picture')
+
+class FooForm(forms.Form):
+	x = forms.CharField()
+	def __init__(self, province_id, city_id, *args, **kwargs):
+		print province_id
+		print city_id
+		super(FooForm, self).__init__(*args, **kwargs)
+
+class FirstRequiredFormSet(BaseFormSet):
+    def __init__(self, *args, **kwargs):
+        super(FirstRequiredFormSet, self).__init__(*args, **kwargs)
+        self.forms[0].empty_permitted = False

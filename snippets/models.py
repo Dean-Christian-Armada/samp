@@ -1,4 +1,5 @@
 from django.db import models
+import os
 
 # Create your models here.
 class Section(models.Model):
@@ -36,6 +37,26 @@ class Students(models.Model):
 
 	def x(self):
 		return self.name+"dean"
+
+# A scipt used for dynamic folders in picture file upload
+def content_file_name(instance, filename):
+    upload_dir = os.path.join('dynamic-folder-pictures',instance.folder_path.name)
+    if not os.path.exists(upload_dir):
+        os.makedirs(upload_dir)
+    return os.path.join(upload_dir, filename)
+
+# Use "/" as a part of the name for sub-folder
+class PictureFolders(models.Model):
+	name = models.CharField(max_length=50, default=None)
+
+	def __str__(self):
+		return self.name
+
+class NamePicture(models.Model):
+	name = models.CharField(max_length=50, default=None)
+	# job = models.CharField(max_length=50, default=None)
+	folder_path = models.ForeignKey(PictureFolders, default=None)
+	picture = models.ImageField(upload_to=content_file_name, blank=True)
 
 # class CommonInfo(models.Model):
 #     name = models.CharField(max_length=100)
